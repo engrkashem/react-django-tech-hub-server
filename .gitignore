@@ -13,3 +13,7 @@ tests/coverage_html/
 tests/.coverage*
 build/
 tests/report/
+**/migrations
+*.DS_Store
+**/__pycache__
+**/.DS_Store
