@@ -47,4 +47,12 @@ class UserView(APIView):
 
 
     def delete(self, request):
-        pass
+        user = request.data
+        try:
+            get_user = User.objects.get(email = user['email'])
+        except:
+            return Response({'message':'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        get_user.delete()
+        return Response({'message': 'User deleted successfully'}, status = status.HTTP_204_NO_CONTENT)
+            
+
