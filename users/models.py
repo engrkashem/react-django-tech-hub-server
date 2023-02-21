@@ -11,5 +11,4 @@ class User(models.Model):
 
     def __str__(self) -> str:
         return self.email
-    
-    
+
