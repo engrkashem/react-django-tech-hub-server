@@ -48,3 +48,4 @@ class UserView(APIView):
 
     def delete(self, request):
         pass
+    
