@@ -11,4 +11,5 @@ urlpatterns = [
     path('job/', JobView.as_view()),
     path('job/<int:pk>/', JobView.as_view()),
     path('blog/', BlogView.as_view()),
+    path('blog/<int:pk>', BlogView.as_view()),
 ]

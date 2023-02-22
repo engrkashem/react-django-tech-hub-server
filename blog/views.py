@@ -12,6 +12,15 @@ class BlogView(APIView):
         serialized_blog=BlogSerializer(blogs_obj, many=True)
         return Response(serialized_blog.data, status=status.HTTP_200_OK)
     
+    def get(self,request,pk):
+        try:
+            blog_obj=BlogModel.objects.get(id=pk)
+        except:
+            return Response({'message':'Blog not found in the database'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        serialized_blog=BlogSerializer(blog_obj)
+        return Response(serialized_blog.data, status=status.HTTP_200_OK)
+    
     def post(self, request):
         blog_obj=request.data
         serialized_blog=BlogSerializer(data=blog_obj)
