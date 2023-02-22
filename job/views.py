@@ -5,3 +5,6 @@ from rest_framework.views import APIView
 
 class JobView(APIView):
     pass
+
+class JobViewID(APIView):
+    pass
