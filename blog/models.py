@@ -5,6 +5,7 @@ from users.models import User
 
 class BlogModel(models.Model):
     blog_heading=models.CharField(max_length=200, blank=False, default='')
+    user_name=models.CharField(max_length=100, blank=False, default='')
     user_email=models.EmailField(blank=False, default='', null=False)
     blog_body=models.TextField()
     liked=models.IntegerField(default=0)
