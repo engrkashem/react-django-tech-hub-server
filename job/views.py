@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Job
 from .serializers import JobSerializer
+from users.models import User
+from users.serializers import UserSerializer
 # Create your views here.
 
 class JobView(APIView):
@@ -12,7 +14,13 @@ class JobView(APIView):
         return Response(serialized.data, status= status.HTTP_200_OK)
     
     def post(self, request):
-        serializer = JobSerializer(data=request.data)
+        job = request.data
+        # user = User.objects.get(pk=job['creator'])
+        # serializedUser = UserSerializer(user)
+        # job['creator'] = serializedUser.data
+
+        # print(job)
+        serializer = JobSerializer(data = job)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status= status.HTTP_201_CREATED)
