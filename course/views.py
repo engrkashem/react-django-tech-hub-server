@@ -4,3 +4,6 @@ from rest_framework.views import APIView
 
 class CourseView(APIView):
     pass
+
+class CourseViewID(APIView):
+    pass

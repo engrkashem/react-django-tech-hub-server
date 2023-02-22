@@ -7,15 +7,24 @@ from .serializers import JobSerializer
 
 class JobView(APIView):
     def get(self, request):
-        try:
-            pk = request.query_params['id']
-            job = Job.objects.get(pk=pk)
-            serialized = JobSerializer(job)
-            return Response(serialized.data, status= status.HTTP_200_OK)
-        except:
-            jobs = Job.objects.all()
-            serialized = JobSerializer(jobs, many=True)
-            return Response(serialized.data, status= status.HTTP_200_OK)
+        jobs = Job.objects.all()
+        serialized = JobSerializer(jobs, many=True)
+        return Response(serialized.data, status= status.HTTP_200_OK)
     
-    # def get(self, request, pk, format=None):
-    #     pass
+    def post(self, request):
+        serializer = JobSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status= status.HTTP_201_CREATED)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+    
+    
+
+class JobViewID(APIView):
+    def get(self, request, pk):
+        try:
+            job = Job.objects.get(pk=pk)
+        except:
+            return Response(message = "Job not found", status= status.HTTP_404_NOT_FOUND)
+        serialized = JobSerializer(job)
+        return Response(serialized.data, status= status.HTTP_200_OK)

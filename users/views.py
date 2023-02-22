@@ -9,8 +9,12 @@ class UserView(APIView):
     def get(self, request, format=None):
         # get all the users
         user = User.objects.all()
+        # for u in user:
+        #     print(u.userName, u.email, u.skill_set)
+        
         # serialize them 
         serialized = UserSerializer(user, many = True)
+        # print(serialized)
         # return json
         
         return JsonResponse({'users':serialized.data}, status=status.HTTP_200_OK)
