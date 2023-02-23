@@ -4,7 +4,7 @@ from django.db import models
 class Course(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    course_fee =models.IntegerField()
+    course_fee = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     video_thumbnail_url = models.CharField(max_length=200)
     video_playlist_url = models.CharField(max_length=200)
 
