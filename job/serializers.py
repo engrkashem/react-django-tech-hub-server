@@ -11,4 +11,5 @@ class JobSerializer(serializers.ModelSerializer):
     def to_representation(self, obj):
         self.fields['creator'] = UserSerializer(read_only=True)
         return super().to_representation(obj)
+
     

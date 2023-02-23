@@ -10,7 +10,7 @@ class JobView(APIView):
     def get(self, request):
         param = request.query_params
         try:
-            jobs_from_db = Job.objects.filter(skills__icontains = param['search'])
+            jobs_from_db = Job.objects.filter(skill_requirements__icontains = param['search'])
             if(jobs_from_db):
                 serialized = JobSerializer(jobs_from_db, many = True)
                 return Response(serialized.data, status=status.HTTP_200_OK)
