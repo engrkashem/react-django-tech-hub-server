@@ -5,11 +5,13 @@ from users.models import User
 
 class BlogModel(models.Model):
     blog_heading=models.CharField(max_length=200, blank=False, default='')
-    user_name=models.CharField(max_length=100, blank=False, default='')
-    user_email=models.EmailField(blank=False, default='', null=False)
     blog_body=models.TextField()
+    topic=models.CharField(max_length=200, default='')
+    post_time=models.DateTimeField(auto_now_add=True, blank=True, editable=False)
+    post_update_time=models.DateTimeField(auto_now=True, blank=True, editable=False)
+    img_url=models.URLField(blank=True)
+    blog_creator=models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')   
     liked=models.IntegerField(default=0)
-    post_time=models.DateField(auto_now=True ,blank=True, editable=False)
     saved_by=models.EmailField(blank=True)
 
     def __str__(self) -> str:

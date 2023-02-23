@@ -1,10 +1,12 @@
 from django.db import models
+from users.models import User
 
-# Create your models here.
 class Course(models.Model):
+    instructor = models.ForeignKey(User,  on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField()
     course_fee = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+    course_length = models.CharField(max_length=200)
     video_thumbnail_url = models.CharField(max_length=200)
     video_playlist_url = models.CharField(max_length=200)
 
