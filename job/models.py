@@ -10,7 +10,7 @@ class Job(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     photo_url = models.URLField(blank=True)
     creator = models.ForeignKey(User, related_name="job_posted", on_delete=models.CASCADE)
-    skills = models.CharField(max_length=100)
+    skill_requirements = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
