@@ -4,13 +4,11 @@ from users.serializers import UserSerializer
 from users.models import User
 
 class JobSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Job
-        fields = ['title', 'content', 'created_at', 'updated_at', 'photo_url','user']
+        fields = '__all__'
 
-    def get_user(self, obj):
-        user_data = User.objects.get(id=obj.creator.id)
-        return {'id': user_data.id ,'userName': user_data.userName, 'photo_url': user_data.photo_url, 'profession': user_data.profession}
-
+    def to_representation(self, obj):
+        self.fields['creator'] = UserSerializer(read_only=True)
+        return super().to_representation(obj)
     
