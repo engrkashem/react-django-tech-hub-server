@@ -6,6 +6,7 @@ from users.models import User
 class BlogModel(models.Model):
     blog_heading=models.CharField(max_length=200, blank=False, default='')
     blog_body=models.TextField()
+    topic=models.CharField(max_length=200, default='')
     post_time=models.DateTimeField(auto_now_add=True, blank=True, editable=False)
     post_update_time=models.DateTimeField(auto_now=True, blank=True, editable=False)
     img_url=models.URLField(blank=True)
