@@ -1,6 +1,6 @@
 from django.urls import path
 from users.views import UserView
-from course.views import CourseView
+from course.views import CourseView, EnrollView
 from job.views import JobView, JobViewID
 from blog.views import BlogView, BlogViewID
 
@@ -12,4 +12,6 @@ urlpatterns = [
     path('job/<int:pk>/', JobViewID.as_view()),
     path('blog/', BlogView.as_view()),
     path('blog/<int:pk>', BlogViewID.as_view()),
+    path('enroll/', EnrollView.as_view()),
+    path('enroll/<int:pk>/', EnrollView.as_view()),
 ]

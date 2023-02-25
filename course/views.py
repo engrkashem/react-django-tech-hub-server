@@ -1,12 +1,12 @@
 from rest_framework.views import APIView
-from .serializers import CourseSerializer
+from .serializers import CourseSerializer, EnrollSerializer
 from django.http import JsonResponse
 from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
-from .models import Course
+from .models import Course,Enroll
 class CourseView(APIView):
     #get course for list wish and individual 
     def get(self, request, pk=None, format=None):
@@ -55,3 +55,27 @@ class CourseView(APIView):
         except Course.DoesNotExist:
             return Response({"error": "Course not found"}, status=status.HTTP_404_NOT_FOUND)
 
+
+class EnrollView(APIView):
+    # get course for list wish and individual
+    def get(self, request, pk=None, format=None):
+        if pk:
+            try:
+                enroll = Enroll.objects.get(pk=pk)
+                serialized = EnrollSerializer(enroll)
+                return JsonResponse({'enroll': serialized.data}, status=status.HTTP_200_OK)
+            except Enroll.DoesNotExist:
+                raise Http404
+        else:
+            enroll = Enroll.objects.all()
+            serialized = EnrollSerializer(enroll, many=True)
+            return JsonResponse({'enroll': serialized.data}, status=status.HTTP_200_OK)
+    # create new course
+
+    def post(self, request, format=None):
+        enroll = request.data
+        serialized = EnrollSerializer(data=enroll)
+        if serialized.is_valid():
+            serialized.save()
+            return Response(serialized.data, status=status.HTTP_201_CREATED)
+        return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
