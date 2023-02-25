@@ -160,3 +160,4 @@ CORS_ALLOW_HEADERS = [
 #         'rest_framework.renderers.JSONRenderer',
 #     )
 # }
+
