@@ -39,7 +39,7 @@ class BlogViewID(APIView):
         except:
             return Response( status=status.HTTP_400_BAD_REQUEST)
         blog_by_id_from_db.delete()
-        return Response({'status':204},status=status.HTTP_204_NO_CONTENT)
+        return Response({'message':'Blog is deleted'},status=status.HTTP_204_NO_CONTENT)
 
 
 
