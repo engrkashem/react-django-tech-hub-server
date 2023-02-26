@@ -23,7 +23,7 @@ class BlogViewID(APIView):
         try:
             blog_by_id_from_db=BlogModel.objects.get(id=pk)
         except:
-            return Response({'message':'Blog does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response( status=status.HTTP_400_BAD_REQUEST)
         
         updated_blog=request.data
         serialized=BlogSerializer(blog_by_id_from_db, data=updated_blog)
@@ -37,9 +37,9 @@ class BlogViewID(APIView):
         try:
             blog_by_id_from_db=BlogModel.objects.get(id=pk)
         except:
-            return Response({'message':'Blog does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response( status=status.HTTP_400_BAD_REQUEST)
         blog_by_id_from_db.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'status':204},status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -55,7 +55,7 @@ class BlogView(APIView):
     def post(self, request):
         blog_obj=request.data
         if not blog_obj.get('blog_heading'):
-            return Response({'message': 'Blog Heading is Required'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response( status=status.HTTP_400_BAD_REQUEST)
         # print(blog_obj)
         serialized_blog=BlogSerializer(data=blog_obj)
         if serialized_blog.is_valid():
