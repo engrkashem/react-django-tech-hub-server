@@ -17,8 +17,8 @@ class UserView(APIView):
         # print(serialized)
         # return json
         
-        return JsonResponse({'users':serialized.data}, status=status.HTTP_200_OK)
-        # return Response(serialized.data, status=status.HTTP_200_OK)
+        # return JsonResponse({'users':serialized.data}, status=status.HTTP_200_OK)
+        return Response(serialized.data, status=status.HTTP_200_OK)
     
     def post(self, request, format=None):
         user = request.data
