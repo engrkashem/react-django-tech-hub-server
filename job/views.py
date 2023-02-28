@@ -11,10 +11,8 @@ class JobView(APIView):
         param = request.query_params
         try:
             jobs_from_db = Job.objects.filter(skill_requirements__icontains = param['search'])
-            if(jobs_from_db):
-                serialized = JobSerializer(jobs_from_db, many = True)
-                return Response({'jobs':serialized.data}, status=status.HTTP_200_OK)
-            return Response({'message':'Jobs not found for this skill'}, status=status.HTTP_404_NOT_FOUND)
+            serialized = JobSerializer(jobs_from_db, many = True)
+            return Response({'jobs':serialized.data}, status=status.HTTP_200_OK)
         except:
             jobs = Job.objects.all()
             serialized = JobSerializer(jobs, many=True)
