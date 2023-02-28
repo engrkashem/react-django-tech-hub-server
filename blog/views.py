@@ -46,7 +46,12 @@ class BlogViewID(APIView):
 class BlogView(APIView):
     # get all blog in the database
     def get(self, request):
-        blogs_obj=BlogModel.objects.all()
+        params=request.query_params
+        if params:
+            blogs_obj=BlogModel.objects.filter(topic__startswith=params['topic'])
+        else:
+            blogs_obj=BlogModel.objects.all()
+        
         serialized_blog=BlogSerializer(blogs_obj, many=True)
         return Response(serialized_blog.data, status=status.HTTP_200_OK)
 
