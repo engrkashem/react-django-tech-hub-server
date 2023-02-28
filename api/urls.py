@@ -14,4 +14,5 @@ urlpatterns = [
     path('blog/<int:pk>', BlogViewID.as_view()),
     path('enroll/', EnrollView.as_view()),
     path('enroll/<int:pk>/', EnrollView.as_view()),
+
 ]
