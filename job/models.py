@@ -13,6 +13,7 @@ class Job(models.Model):
     creator = models.ForeignKey(User, related_name="job_posted", on_delete=models.CASCADE, default='')
     location = models.CharField(max_length=150, default='')
     skill_requirements = models.CharField(max_length=100, default='')
+    about_company = models.TextField(max_length=250, default='')
 
     def __str__(self):
         return self.title
