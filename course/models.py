@@ -14,3 +14,11 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Enroll(models.Model):
+    student = models.ForeignKey(User, related_name='Enroll_User', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, related_name='Enroll_Course', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.course.title
