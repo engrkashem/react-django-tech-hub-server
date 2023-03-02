@@ -18,6 +18,9 @@ class EnrollSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def to_representation(self, instance):
-        self.fields['Enroll_User'] = UserSerializer(read_only=True)
-        self.fields['Enroll_Course'] = CourseSerializer(read_only=True)
+        self.fields['student'] = UserSerializer(read_only=True)
+        return super().to_representation(instance)
+    
+    def to_representation(self, instance):
+        self.fields['course'] = CourseSerializer(read_only=True)
         return super().to_representation(instance)
