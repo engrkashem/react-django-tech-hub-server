@@ -6,9 +6,11 @@ from django.http import Http404
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
-from .models import Course,Enroll
+from .models import Course, Enroll
+
+
 class CourseView(APIView):
-    #get course for list wish and individual 
+    # get course for list wish and individual
     def get(self, request, pk=None, format=None):
         if pk:
             try:
@@ -21,7 +23,8 @@ class CourseView(APIView):
             course = Course.objects.all()
             serialized = CourseSerializer(course, many=True)
             return JsonResponse({'course': serialized.data}, status=status.HTTP_200_OK)
-    #create new course
+    # create new course
+
     def post(self, request, format=None):
         course = request.data
         serialized = CourseSerializer(data=course)
@@ -29,10 +32,12 @@ class CourseView(APIView):
             serialized.save()
             return Response(serialized.data, status=status.HTTP_201_CREATED)
         return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
-    #find data by id
+    # find data by id
+
     def get_object(self, pk):
         return get_object_or_404(Course, pk=pk)
-    #update course
+    # update course
+
     def put(self, request, pk, format=None):
         try:
             course = self.get_object(pk)
@@ -46,7 +51,8 @@ class CourseView(APIView):
         else:
             print(serializer.errors)  # Print the serializer errors
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #delete course
+    # delete course
+
     def delete(self, request, pk, format=None):
         try:
             course = self.get_object(pk)
@@ -79,3 +85,14 @@ class EnrollView(APIView):
             serialized.save()
             return Response(serialized.data, status=status.HTTP_201_CREATED)
         return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class EnrollUserView(APIView):
+    # get enrollments for specific user
+    def get(self, request, user_id, format=None):
+        try:
+            enrollments = Enroll.objects.filter(student__id=user_id)
+            serialized = EnrollSerializer(enrollments, many=True)
+            return JsonResponse({'enrollments': serialized.data}, status=status.HTTP_200_OK)
+        except Enroll.DoesNotExist:
+            raise Http404
