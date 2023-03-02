@@ -16,13 +16,13 @@ class CourseView(APIView):
             try:
                 course = Course.objects.get(pk=pk)
                 serialized = CourseSerializer(course)
-                return JsonResponse({'course': serialized.data}, status=status.HTTP_200_OK)
+                return Response(serialized.data, status=status.HTTP_200_OK)
             except Course.DoesNotExist:
                 raise Http404
         else:
             course = Course.objects.all()
             serialized = CourseSerializer(course, many=True)
-            return JsonResponse({'course': serialized.data}, status=status.HTTP_200_OK)
+            return Response(serialized.data, status=status.HTTP_200_OK)
     # create new course
 
     def post(self, request, format=None):
