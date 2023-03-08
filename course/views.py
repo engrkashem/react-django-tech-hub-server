@@ -20,7 +20,7 @@ class CourseView(APIView):
             except Course.DoesNotExist:
                 raise Http404
         else:
-            course = Course.objects.all()
+            course = Course.objects.all().order_by('-create_at')
             serialized = CourseSerializer(course, many=True)
             return Response(serialized.data, status=status.HTTP_200_OK)
     # create new course
@@ -73,7 +73,7 @@ class EnrollView(APIView):
             except Enroll.DoesNotExist:
                 raise Http404
         else:
-            enroll = Enroll.objects.all()
+            enroll = Enroll.objects.all().order_by('-enrolled_at')
             serialized = EnrollSerializer(enroll, many=True)
             return JsonResponse({'enroll': serialized.data}, status=status.HTTP_200_OK)
     # create new course
