@@ -14,15 +14,6 @@ class Course(models.Model):
     video_playlist_url = models.CharField(max_length=200, default='')
     enroll_status=models.BooleanField( default=False)
     create_at = models.DateTimeField(auto_now_add=True)
-    
-    # def formfield(self, **kwargs):
-    #     defaults = {'form_class': forms.DateTimeField}
-    #     defaults.update(kwargs)
-    #     return super().formfield(**defaults)
-
-    # class Meta:
-    #     ordering = ['-create_at']
-        
 
     def __str__(self):
         return self.title
