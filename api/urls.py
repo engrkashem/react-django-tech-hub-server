@@ -3,8 +3,10 @@ from users.views import UserView
 from course.views import CourseView, EnrollView, EnrollUserView
 from job.views import JobView, JobViewID
 from blog.views import BlogView, BlogViewID
+from payment.views import StripeCheckoutView
 
 urlpatterns = [
+    path('stripe/create-checkout-session', StripeCheckoutView.as_view()),
     path('user/', UserView.as_view()),
     path('course/', CourseView.as_view()),
     path('course/<int:pk>/', CourseView.as_view()),
