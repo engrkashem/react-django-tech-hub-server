@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'course',
     'job',
     'corsheaders',
+    'payment',
 ]
 
 MIDDLEWARE = [
