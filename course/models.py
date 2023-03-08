@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from users.models import User
 
 class Course(models.Model):
@@ -12,6 +13,16 @@ class Course(models.Model):
     video_thumbnail_url = models.CharField(max_length=200, default='')
     video_playlist_url = models.CharField(max_length=200, default='')
     enroll_status=models.BooleanField( default=False)
+    create_at = models.DateTimeField(auto_now_add=True)
+    
+    # def formfield(self, **kwargs):
+    #     defaults = {'form_class': forms.DateTimeField}
+    #     defaults.update(kwargs)
+    #     return super().formfield(**defaults)
+
+    # class Meta:
+    #     ordering = ['-create_at']
+        
 
     def __str__(self):
         return self.title
@@ -20,6 +31,7 @@ class Course(models.Model):
 class Enroll(models.Model):
     student = models.ForeignKey(User, related_name='Enroll_User', on_delete=models.CASCADE)
     course = models.ForeignKey(Course, related_name='Enroll_Course', on_delete=models.CASCADE)
+    enrolled_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.course.title
