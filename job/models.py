@@ -18,3 +18,9 @@ class Job(models.Model):
     def __str__(self):
         return self.title
     
+
+class Applications(models.Model):
+    name = models.CharField(max_length=100, default = '')
+    resume = models.URLField(default='')
+    job = models.ForeignKey(Job, related_name='application', on_delete=models.CASCADE)
+
