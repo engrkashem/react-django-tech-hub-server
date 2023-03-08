@@ -26,3 +26,6 @@ class Enroll(models.Model):
 
     def __str__(self):
         return self.course.title
+
+
+# "2022-03-09 10:00:00+05:30"
