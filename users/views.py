@@ -36,14 +36,13 @@ class UserView(APIView):
         return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request):
-        user=request.data
-
+        updated_user=request.data
         try:
-            get_user_from_db=User.objects.get(email=user['email'])
+            get_user_from_db=User.objects.get(email=updated_user['email'])
         except:
             return Response({'message':'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        serialized=UserSerializer(get_user_from_db, data=user)
+        serialized=UserSerializer(get_user_from_db, data=updated_user)
         if serialized.is_valid():
             serialized.save()
             return Response(serialized.data, status=status.HTTP_200_OK)
