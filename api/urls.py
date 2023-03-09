@@ -5,6 +5,7 @@ from job.views import JobView, JobViewID, ApplicationView
 
 from blog.views import BlogView, BlogViewID
 from payment.views import StripePaymentView, SaveStripeInfo
+from messaging.views import MessageView
 
 urlpatterns = [
         path('payment/stripe-test-payment/', StripePaymentView.as_view()),
@@ -22,4 +23,5 @@ urlpatterns = [
     path('application/<int:pk>/', ApplicationView.as_view()),
     # path('enrolluser/<int:pk>/', Enrolluser.as_view()),
     path('enrollments/user/<int:user_id>/',EnrollUserView.as_view(), name='user-enrollments'),
+    path('message/', MessageView.as_view()),
 ]

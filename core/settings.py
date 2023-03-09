@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'job',
     'corsheaders',
     'payment',
+    'messaging',
 ]
 
 MIDDLEWARE = [
