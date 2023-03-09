@@ -69,19 +69,6 @@ class EnrollView(APIView):
         serialized = EnrollSerializer(enroll, many=True)
         return JsonResponse({'enroll': serialized.data}, status=status.HTTP_200_OK)
 
-        # if pk:
-        #     try:
-        #         enroll = Enroll.objects.get(pk=pk)
-        #         serialized = EnrollSerializer(enroll)
-        #         return JsonResponse({'enroll': serialized.data}, status=status.HTTP_200_OK)
-        #     except Enroll.DoesNotExist:
-        #         raise Http404
-        # else:
-        #     enroll = Enroll.objects.all().order_by('-enrolled_at')
-        #     serialized = EnrollSerializer(enroll, many=True)
-        #     return JsonResponse({'enroll': serialized.data}, status=status.HTTP_200_OK)
-    # create new course
-
     def post(self, request, format=None):
         enroll = request.data
         serialized = EnrollSerializer(data=enroll)
